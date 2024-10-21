@@ -1,0 +1,135 @@
+/* 기존 스타일 */
+.app {
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: black;
+  background-image: linear-gradient(rgb(47, 47, 47) 1px, transparent 1px),
+                    linear-gradient(90deg, rgb(47, 47, 47) 1px, transparent 1px);
+  background-size: 10px 10px;
+  
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.word-container {
+  display: flex;
+  flex-wrap: wrap; /* 단어가 화면을 넘어서면 자동으로 다음 줄로 이동 */
+  justify-content: center;
+  width: 75%; /* 컨테이너의 너비를 설정하여 화면에 맞게 */
+  gap: 5px; /* 단어 사이의 간격 */
+}
+
+.word {
+  font-weight: 500;
+  color: white;
+  font-size: 1.5rem; 
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-block;
+  word-break: keep-all; /* 단어가 끊어지지 않도록 설정 */
+  flex: 1 1 auto; /* 단어의 크기를 자동으로 조정하여 flexbox 레이아웃에 맞게 확장 */
+  z-index: 10;
+}
+
+.word img {
+  max-width: 100%; /* 부모 요소의 너비에 맞추어 조정 */
+  height: auto; /* 비율을 유지하며 높이 조정 */
+  object-fit: contain; /* 이미지가 지정된 박스 안에서 비율을 유지하며 들어가도록 설정 */
+  z-index: 5;
+}
+
+.word.hover {
+  animation: strokeGrow 1s forwards;
+}
+
+.word.img:hover {
+  animation: fadeOut 1s forwards; /* 호버 시 점차 투명해지도록 애니메이션 적용 */
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; /* 완전히 불투명한 상태에서 시작 */
+  }
+  100% {
+    opacity: 0.2; /* 완전히 투명해짐 */
+  }
+}
+
+@keyframes strokeGrow {
+  0% {
+    -webkit-text-stroke: 0px white;
+  }
+  10% {
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+  }
+  20% {
+    -webkit-text-stroke: 4px rgb(255, 255, 255);
+  }
+  50% {
+    -webkit-text-stroke: 6px rgb(255, 255, 255);
+  }
+  60% {
+    -webkit-text-stroke: 8px rgb(189, 189, 189);
+  }
+  80% {
+    -webkit-text-stroke: 12px rgb(154, 154, 154);
+  }
+  100% {
+    -webkit-text-stroke: 20px rgb(134, 134, 134);
+  }
+}
+
+.word.leave {
+  animation: strokeShrink 0.3s forwards;
+}
+
+@keyframes strokeShrink {
+  0% {
+    -webkit-text-stroke: 3px white;
+  }
+  100% {
+    -webkit-text-stroke: 0px white;
+  }
+}
+
+.word.spinning {
+  animation: spin 0.1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* 새로 추가된 텍스트 스타일 */
+.new-word {
+  font-weight: 700;
+  color: #ffcc00; /* 새 단어의 색상은 노란색으로 설정 */
+  font-size: 2rem; /* 기존 단어보다 조금 더 크도록 설정 */
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: absolute;
+   /* 새 텍스트가 다른 요소보다 앞에 보이도록 설정 */
+}
+
+.new-word:hover {
+  color: #ff9933; /* 호버 시 색상이 주황색으로 변경 */
+  transform: scale(1.1); /* 호버 시 크기가 1.1배로 커짐 */
+}
+
+.new-word img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block; /* 이미지는 블록 요소로 처리 */
+}
